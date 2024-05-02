@@ -58,8 +58,7 @@ def get_comrec_build(pkg_dir, build_cmd=build_py):
                 'git rev-parse --short HEAD',
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                shell=True,
-            )
+                shell=False)
             repo_commit, _ = proc.communicate()
             # Fix for python 3
             repo_commit = str(repo_commit)
