@@ -4,6 +4,7 @@ import sys
 from subprocess import run
 
 from packaging.version import Version
+from security import safe_command
 
 try:
     from ._version import __version__
@@ -103,8 +104,7 @@ def pkg_commit_hash(pkg_path: str | None = None) -> tuple[str, str]:
     if ver.local is not None and ver.local.startswith('g'):
         return 'installation', ver.local[1:8]
     # maybe we are in a repository
-    proc = run(
-        ('git', 'rev-parse', '--short', 'HEAD'),
+    proc = safe_command.run(run, ('git', 'rev-parse', '--short', 'HEAD'),
         capture_output=True,
         cwd=pkg_path,
     )
