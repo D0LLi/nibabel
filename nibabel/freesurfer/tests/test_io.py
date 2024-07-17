@@ -89,7 +89,7 @@ def test_geometry():
         assert np.array_equal(volume_info2['cras'], volume_info['cras'])
         with open(surf_path, 'rb') as fobj:
             np.fromfile(fobj, '>u1', 3)
-            read_create_stamp = fobj.readline().decode().rstrip('\n')
+            read_create_stamp = fobj.readline(5_000_000).decode().rstrip('\n')
 
         # now write an incomplete file
         write_geometry(surf_path, coords, faces)
