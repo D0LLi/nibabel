@@ -39,6 +39,7 @@ from glob import glob
 from os.path import abspath
 from os.path import join as pjoin
 from subprocess import PIPE, Popen
+
 from security import safe_command
 
 NEEDS_SHELL = os.name != 'nt'
