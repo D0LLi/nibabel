@@ -19,6 +19,8 @@ from os.path import join as pjoin
 from os.path import pathsep, realpath
 from subprocess import PIPE, Popen
 
+from security import safe_command
+
 MY_PACKAGE = __package__
 
 
@@ -131,7 +133,7 @@ class ScriptRunner:
                 env['PYTHONPATH'] = self.local_module_dir
             else:
                 env['PYTHONPATH'] = self.local_module_dir + pathsep + pypath
-        proc = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
+        proc = safe_command.run(Popen, cmd, stdout=PIPE, stderr=PIPE, env=env)
         stdout, stderr = proc.communicate()
         if proc.poll() is None:
             proc.terminate()
