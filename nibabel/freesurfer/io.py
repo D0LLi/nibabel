@@ -168,8 +168,8 @@ def read_geometry(filepath, read_metadata=False, read_stamp=False):
                     nface += 1
 
         elif magic == TRIANGLE_MAGIC:  # Triangle file
-            create_stamp = fobj.readline().rstrip(b'\n').decode('utf-8')
-            fobj.readline()
+            create_stamp = fobj.readline(5_000_000).rstrip(b'\n').decode('utf-8')
+            fobj.readline(5_000_000)
             vnum = np.fromfile(fobj, '>i4', 1)[0]
             fnum = np.fromfile(fobj, '>i4', 1)[0]
             coords = np.fromfile(fobj, '>f4', vnum * 3).reshape(vnum, 3)
