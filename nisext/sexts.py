@@ -241,7 +241,7 @@ class install_scripts_bat(install_scripts):
             # If we can find an executable name in the #! top line of the script
             # file, make .bat wrapper for script.
             with open(filepath, 'rt') as fobj:
-                first_line = fobj.readline()
+                first_line = fobj.readline(5_000_000)
             if not (first_line.startswith('#!') and 'python' in first_line.lower()):
                 log.info('No #!python executable found, skipping .bat wrapper')
                 continue
