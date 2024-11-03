@@ -20,10 +20,10 @@ def clone_repo(url, branch):
     tmpdir = tempfile.mkdtemp()
     try:
         cmd = f'git clone {url} {tmpdir}'
-        call(cmd, shell=True)
+        call(cmd, shell=False)
         os.chdir(tmpdir)
         cmd = f'git checkout {branch}'
-        call(cmd, shell=True)
+        call(cmd, shell=False)
     except:
         shutil.rmtree(tmpdir)
         raise
