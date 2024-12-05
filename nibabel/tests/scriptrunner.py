@@ -18,6 +18,7 @@ from os.path import dirname, isdir, isfile
 from os.path import join as pjoin
 from os.path import pathsep, realpath
 from subprocess import PIPE, Popen
+
 from security import safe_command
 
 MY_PACKAGE = __package__
