@@ -40,6 +40,8 @@ from os.path import abspath
 from os.path import join as pjoin
 from subprocess import PIPE, Popen
 
+from security import safe_command
+
 NEEDS_SHELL = os.name != 'nt'
 PYTHON = sys.executable
 HAVE_PUTENV = hasattr(os, 'putenv')
@@ -75,7 +77,7 @@ def back_tick(cmd, ret_err=False, as_str=True):
     RuntimeError
         if command returns non-zero exit code.
     """
-    proc = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=NEEDS_SHELL)
+    proc = safe_command.run(Popen, cmd, stdout=PIPE, stderr=PIPE, shell=NEEDS_SHELL)
     out, err = proc.communicate()
     retcode = proc.returncode
     if retcode is None:
